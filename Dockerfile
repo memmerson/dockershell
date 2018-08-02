@@ -8,12 +8,9 @@ RUN rpm -ihv epel-release-latest-7.noarch.rpm
 
 # Install packages
 RUN yum install -y \
-	man man-pages gettext openssh-client vim \
-	bind-utils net-tools nmap curl wget less \
-	unzip git python2-pip groff telnet jq tar \
-	mosh nmap telnet iotop iftop iptraf-ng mtr \
-	traceroute iperf ncdu pv hping3 procps \
-	util-linux make ansible
+	man man-pages gettext openssh-client vim bind-utils net-tools nmap curl wget less	unzip git \
+	python2-pip groff telnet jq tar mosh nmap telnet iotop iftop iptraf-ng mtr traceroute iperf ncdu \
+	pv hping3 procps util-linux make ansible
 
 RUN pip install awscli boto3
 RUN curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
