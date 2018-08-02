@@ -1,6 +1,6 @@
-FROM amazonlinux2
+FROM amazonlinux
 
-RUN yum update -y
+RUN yum update -y && yum install -y wget
 
 # Install EPEL
 RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -15,7 +15,7 @@ RUN yum install -y \
 	traceroute iperf ncdu pv hping3 procps \
 	util-linux
 
-RUN pip install awscli boto3 glances
+RUN pip install awscli boto3
 RUN curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 # Install Docker tools
