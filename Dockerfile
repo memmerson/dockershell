@@ -13,7 +13,7 @@ RUN yum install -y \
 	unzip git python2-pip groff telnet jq tar \
 	mosh nmap telnet iotop iftop iptraf-ng mtr \
 	traceroute iperf ncdu pv hping3 procps \
-	util-linux
+	util-linux make
 
 RUN pip install awscli boto3
 RUN curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
