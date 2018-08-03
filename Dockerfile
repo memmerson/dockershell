@@ -1,4 +1,5 @@
 FROM amazonlinux
+WORKDIR /root
 
 RUN yum update -y && yum install -y wget
 
@@ -8,15 +9,18 @@ RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
 
 # Install packages
 RUN yum install -y \
-			man man-pages gettext openssh-client vim bind-utils net-tools nmap curl wget less	unzip git \
+			man man-pages gettext openssh vim bind-utils net-tools nmap curl wget less	unzip git \
 			python2-pip groff telnet jq tar mosh nmap telnet iotop iftop iptraf-ng mtr traceroute iperf \
 			ncdu pv hping3 procps util-linux make ansible && \
 		pip install awscli boto3 && \
-		wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && \
-		unzip terraform_0.11.7_linux_amd64.zip && \
-		mv terraform /usr/local/bin && \
 		curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
+# Install Terraform
+RUN export TF_LATEST_VERSION="https://releases.hashicorp.com$(curl https://releases.hashicorp.com/terraform/ | grep terraform | egrep -v 'rc|beta' | awk -F'"' '{print $2}' | sort --version-sort --reverse | head -1)" && \
+		export TF_FILENAME=$(curl ${TF_LATEST_VERSION} | grep linux_amd64.zip | head -n 1 | awk -F'"' '{print $10}' | awk -F'/' '{print $4}') && \
+		curl ${TF_LATEST_VERSION}${TF_FILENAME} -o ${TF_FILENAME} && \
+		unzip ${TF_FILENAME} && \
+		mv terraform /usr/local/bin
 
 # Install Docker tools
 RUN export DOCKER_DL=$(curl https://download.docker.com/linux/static/stable/x86_64/ \
@@ -28,9 +32,7 @@ RUN export DOCKER_DL=$(curl https://download.docker.com/linux/static/stable/x86_
 		tar zxvf ${DOCKER_DL} && \
 		cp docker/* /usr/bin/
 
-# Cleanup
-RUN	rm -rf docker/ ${DOCKER_DL} && \
+# Misc & Cleanup
+RUN rm -rf docker* && \
 		rm epel-release-latest-7.noarch.rpm && \
-		rm terraform_0.11.7_linux_amd64.zip
-
-WORKDIR /root
+		rm terraform*
