@@ -9,7 +9,7 @@ RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
 
 # Install packages
 RUN yum install -y \
-      man man-pages gettext openssh vim bind-utils net-tools nmap curl wget less  unzip git \
+      man man-pages gettext openssh vim bind-utils iputils net-tools nmap curl wget less  unzip git \
       python2-pip groff telnet jq tar mosh nmap telnet iotop iftop iptraf-ng mtr traceroute iperf \
       ncdu pv hping3 procps util-linux make ansible && \
     pip install awscli boto3 && \
