@@ -1,6 +1,6 @@
 # dockershell
 
-This container is intended to provide me with ephmeral Linux BASH shells for use with OSX and iterm2
+This container provides ephemeral Linux BASH shells for use with OSX and iterm2.
 
 It includes packages I commonly use such as various networking tools, awscli, docker and shell integration for iterm2.
 
