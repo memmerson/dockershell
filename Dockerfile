@@ -13,11 +13,7 @@ RUN yum install -y \
       python2-pip groff telnet jq tar nmap telnet iotop iftop iptraf-ng mtr traceroute iperf \
       ncdu pv hping3 procps util-linux make ansible && \
     yum install -y mosh protobuf-compiler openssl-devel && \
-<<<<<<< HEAD
     pip install awscli boto3 && \
-=======
-    pip install --upgrade --user awscli awsebcli boto3 && \
->>>>>>> 0431b32c6ec4edfc9dc940a2dd093f09dfa6787a
     curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 # Install Terraform
@@ -41,4 +37,3 @@ RUN export DOCKER_DL=$(curl https://download.docker.com/linux/static/stable/x86_
 RUN rm -rf docker* && \
     rm epel-release-latest-7.noarch.rpm && \
     rm terraform*
-
